@@ -1,0 +1,391 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		52294D6272792780DF730612 /* IPLocatorForTVOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C326D82EC9C7676DB893B7 /* IPLocatorForTVOSApp.swift */; };
+		784D636C4BE8369331E3DD63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B441ED04CA65DD311E759CD2 /* ContentView.swift */; };
+		69E7419EA3DEAAE34C3CCEED /* IPLocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3943B84FB50ADF82816E9ED5 /* IPLocationInfo.swift */; };
+		B66FB26B06E8F4A8D84A4622 /* IPLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9965A641C846E321FB115C /* IPLocationService.swift */; };
+		2FA2C8395601678858FC7987 /* CountryFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40C9E87D94AEF2692BD37DD /* CountryFlag.swift */; };
+		BDE855E7BF3614F494C0FCD4 /* LocationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DFA7F670EF1C2C168E3ED /* LocationCardView.swift */; };
+		247978CFE057B6C050D0CC45 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE17544E098DF74B27B4287 /* BackgroundView.swift */; };
+		F5E6FF864FF65E409B2E619B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0CF2FBE8848DDD8C7DEE76A /* Assets.xcassets */; };
+		6EBC37FB6A439407CE4B7A26 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D24B297171503F69257CA0F /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4CDFB1FD6C3933CD2F670C24 /* IPLocatorForTVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPLocatorForTVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81C326D82EC9C7676DB893B7 /* IPLocatorForTVOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPLocatorForTVOSApp.swift; sourceTree = "<group>"; };
+		B441ED04CA65DD311E759CD2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3943B84FB50ADF82816E9ED5 /* IPLocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPLocationInfo.swift; sourceTree = "<group>"; };
+		AA9965A641C846E321FB115C /* IPLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPLocationService.swift; sourceTree = "<group>"; };
+		A40C9E87D94AEF2692BD37DD /* CountryFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFlag.swift; sourceTree = "<group>"; };
+		550DFA7F670EF1C2C168E3ED /* LocationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardView.swift; sourceTree = "<group>"; };
+		4BE17544E098DF74B27B4287 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		A0CF2FBE8848DDD8C7DEE76A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D24B297171503F69257CA0F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A00ECD9134795961943FD26E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14B66E9C1CEE7239008EEFD5 = {
+			isa = PBXGroup;
+			children = (
+				154E91650FA71625165C80AB /* IPLocatorForTVOS */,
+				A5015ED098F3658F62D4885B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		154E91650FA71625165C80AB /* IPLocatorForTVOS */ = {
+			isa = PBXGroup;
+			children = (
+				81C326D82EC9C7676DB893B7 /* IPLocatorForTVOSApp.swift */,
+				B441ED04CA65DD311E759CD2 /* ContentView.swift */,
+				128D5F10047032EF78129219 /* Models */,
+				B7AEB45DF4C11E4AD667BF95 /* Services */,
+				6BE4852EC5FCE315BA69BBE6 /* Utilities */,
+				9285DB7915714670ECD83BE0 /* Views */,
+				A0CF2FBE8848DDD8C7DEE76A /* Assets.xcassets */,
+				DB8F7E758A08BB738F895645 /* Preview Content */,
+			);
+			path = IPLocatorForTVOS;
+			sourceTree = "<group>";
+		};
+		128D5F10047032EF78129219 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3943B84FB50ADF82816E9ED5 /* IPLocationInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B7AEB45DF4C11E4AD667BF95 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA9965A641C846E321FB115C /* IPLocationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6BE4852EC5FCE315BA69BBE6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A40C9E87D94AEF2692BD37DD /* CountryFlag.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9285DB7915714670ECD83BE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				550DFA7F670EF1C2C168E3ED /* LocationCardView.swift */,
+				4BE17544E098DF74B27B4287 /* BackgroundView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DB8F7E758A08BB738F895645 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5D24B297171503F69257CA0F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A5015ED098F3658F62D4885B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4CDFB1FD6C3933CD2F670C24 /* IPLocatorForTVOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4DD974E6ED756938342EDDAC /* IPLocatorForTVOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AE0D88960F26D95192BC186 /* Build configuration list for PBXNativeTarget "IPLocatorForTVOS" */;
+			buildPhases = (
+				022062D504E8BEA79ADC9B5F /* Sources */,
+				A00ECD9134795961943FD26E /* Frameworks */,
+				1951AB6C0894C4F7CC42D07B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPLocatorForTVOS;
+			productName = IPLocatorForTVOS;
+			productReference = 4CDFB1FD6C3933CD2F670C24 /* IPLocatorForTVOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC53A13AE8C1B0E563A17D16 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					4DD974E6ED756938342EDDAC = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 298A2D2BB405CF6EADC84249 /* Build configuration list for PBXProject "IPLocatorForTVOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 14B66E9C1CEE7239008EEFD5;
+			productRefGroup = A5015ED098F3658F62D4885B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DD974E6ED756938342EDDAC /* IPLocatorForTVOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1951AB6C0894C4F7CC42D07B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5E6FF864FF65E409B2E619B /* Assets.xcassets in Resources */,
+				6EBC37FB6A439407CE4B7A26 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		022062D504E8BEA79ADC9B5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52294D6272792780DF730612 /* IPLocatorForTVOSApp.swift in Sources */,
+				784D636C4BE8369331E3DD63 /* ContentView.swift in Sources */,
+				69E7419EA3DEAAE34C3CCEED /* IPLocationInfo.swift in Sources */,
+				B66FB26B06E8F4A8D84A4622 /* IPLocationService.swift in Sources */,
+				2FA2C8395601678858FC7987 /* CountryFlag.swift in Sources */,
+				BDE855E7BF3614F494C0FCD4 /* LocationCardView.swift in Sources */,
+				247978CFE057B6C050D0CC45 /* BackgroundView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7846A393623A83F7B1E9D4AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 16.0;
+			};
+			name = Debug;
+		};
+		B0300A7D48B74E213466D652 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		15C172E17CEE2582CF5488A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"IPLocatorForTVOS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "IPLocator for TVOS";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lidiahakim.IPLocatorForTVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
+			};
+			name = Debug;
+		};
+		41AF720AB7408774B40DAE50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"IPLocatorForTVOS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "IPLocator for TVOS";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lidiahakim.IPLocatorForTVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		298A2D2BB405CF6EADC84249 /* Build configuration list for PBXProject "IPLocatorForTVOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7846A393623A83F7B1E9D4AF /* Debug */,
+				B0300A7D48B74E213466D652 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2AE0D88960F26D95192BC186 /* Build configuration list for PBXNativeTarget "IPLocatorForTVOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15C172E17CEE2582CF5488A0 /* Debug */,
+				41AF720AB7408774B40DAE50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC53A13AE8C1B0E563A17D16 /* Project object */;
+}
