@@ -49,9 +49,19 @@ IPLocatorForTVOS/
   Views/LocationCardView.swift   Glass card showing flag/IP/location
 ```
 
+## App icon
+
+`Assets.xcassets/AppIcon.appiconset` contains a custom icon: a location pin holding
+a globe/latitude-longitude grid, with broadcasting signal arcs, on a navy-to-purple
+gradient matching the in-app UI. It's provided as a flat (non-parallax) tvOS icon at
+the two required sizes (400×240 and 1280×768, @1x/@2x).
+
+For App Store submission, Apple additionally requires a **layered** icon (separate
+front/middle/back images for the parallax effect) and a **Top Shelf Image** — neither
+is included here since they need Xcode's icon composer / real design tooling. For
+development and TestFlight-style local testing, the flat icon above is picked up
+automatically (`ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon`).
+
 ## Notes
 
-- No app icon or Top Shelf image assets are included (they require real image
-  files). Add them in `Assets.xcassets` via Xcode before shipping to the App
-  Store — the app runs fine on-device/simulator without them.
 - Deployment target: tvOS 16.0.
