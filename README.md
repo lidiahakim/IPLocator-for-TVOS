@@ -52,10 +52,11 @@ IPLocatorForTVOS/
 ## App icon
 
 `Assets.xcassets/AppIcon.appiconset` contains a custom icon: a frosted-glass location
-pin (translucent material, specular highlight, soft rim light) with a glowing ring at
-its base suggesting a pinpointed location, on the same navy-to-purple gradient as the
-in-app UI. It's provided as a flat (non-parallax) tvOS icon at the two required sizes
-(400×240 and 1280×768, @1x/@2x).
+pin built from true tangent-line pin geometry (the same construction real map-marker
+icons use, for correct, kink-free proportions), with a soft curved glass shine, edge
+highlighting, and a glowing pulse ring at its base suggesting a pinpointed location —
+on the same navy-to-purple gradient as the in-app UI. It's provided as a flat
+(non-parallax) tvOS icon at the two required sizes (400×240 and 1280×768, @1x/@2x).
 
 For App Store submission, Apple additionally requires a **layered** icon (separate
 front/middle/back images for the parallax effect) and a **Top Shelf Image** — neither
