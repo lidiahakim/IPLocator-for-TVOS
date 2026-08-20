@@ -51,27 +51,34 @@ IPLocatorForTVOS/
 
 ## App icon
 
-`Assets.xcassets/AppIcon.appiconset` contains a custom icon: a translucent glass
-location pin built from true tangent-line pin geometry (the same construction real
-map-marker icons use, for correct, kink-free proportions). The head is shaded like a
-photographed glass sphere — Fresnel-bright rim, a tight specular hotspot plus a softer
-glow, an inner core shadow for roundness, and a blurred, inverted "crystal ball"
-glimpse of the scene behind it — sitting above a large glowing "landing" ellipse
-(roughly double the head's radius) that suggests a pinpointed location. The
-"IPLocator / FOR TVOS" wordmark sits beneath it in Outfit Bold, a freely-licensed
-stand-in for the system font (SF Pro) used by the in-app title, matched to its
-relative sizes/weight/letter-spacing, with a soft contact shadow so it sits in the
-same lit scene rather than looking pasted on. Background is the same navy-to-purple
-gradient as the in-app UI. A finishing pass adds a touch more contrast/saturation, a
-vignette that pulls focus back to the mark, fine film grain (so gradients read as
-material rather than flat digital banding), a whisper of chromatic aberration at the
-glass rim, and a light sharpen after the final resize. Provided as a flat
-(non-parallax) tvOS icon at the two required sizes (400×240 and 1280×768, @1x/@2x).
+`Assets.xcassets/App Icon & Top Shelf Image.brandassets` contains a custom icon: a
+translucent glass location pin built from true tangent-line pin geometry (the same
+construction real map-marker icons use, for correct, kink-free proportions). The head
+is shaded like a photographed glass sphere — Fresnel-bright rim, a tight specular
+hotspot plus a softer glow, an inner core shadow for roundness, and a blurred,
+inverted "crystal ball" glimpse of the scene behind it — sitting above a large
+glowing "landing" ellipse (roughly double the head's radius) that suggests a
+pinpointed location. The "IPLocator / FOR TVOS" wordmark sits beneath it in Outfit
+Bold, a freely-licensed stand-in for the system font (SF Pro) used by the in-app
+title, matched to its relative sizes/weight/letter-spacing, with a soft contact
+shadow so it sits in the same lit scene rather than looking pasted on. Background is
+the same navy-to-purple gradient as the in-app UI. A finishing pass adds a touch more
+contrast/saturation, a vignette that pulls focus back to the mark, fine film grain
+(so gradients read as material rather than flat digital banding), a whisper of
+chromatic aberration at the glass rim, and a light sharpen after the final resize.
+
+The icon uses tvOS's layered format (`App Icon.imagestack` with Front/Middle/Back
+layers, for the parallax effect on the home screen) plus a separate flat
+`App Icon - App Store.imagestack` for the large 1280×768 App Store size. The
+Front/Middle layers are transparent — the artwork is all on the Back layer — so the
+icon currently displays flat rather than with true parallax depth; ask if you'd
+like the design split across layers for a real depth effect.
 
 Note: real tvOS home-screen icons don't usually carry the app name baked in (the OS
 already labels icons on the home screen) — the wordmark is here because it was
 explicitly requested. Ask for an icon-only variant if you want one for store
-submission later.
+submission later. A Top Shelf Image (shown when the app is focused on the home
+screen) isn't included yet — say the word and I'll add one.
 
 For App Store submission, Apple additionally requires a **layered** icon (separate
 front/middle/back images for the parallax effect) and a **Top Shelf Image** — neither
