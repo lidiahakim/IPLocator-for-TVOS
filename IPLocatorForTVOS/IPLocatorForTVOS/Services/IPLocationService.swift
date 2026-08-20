@@ -22,12 +22,14 @@ protocol IPLocationFetching {
 
 /// Looks up the device's public IP address and geolocation.
 ///
-/// Uses ipapi.co — a keyless, HTTPS JSON API — as the data source. No account or
-/// API key is required. (MaxMind's GeoIP2 web service was tried first, but it
-/// requires at least a MaxMind account plus a paid subscription to use as a
-/// hosted API, unlike this.)
+/// Uses ipwho.is — a keyless, HTTPS JSON API — as the data source. No account or
+/// API key is required. (ipapi.co was tried first, but returns HTTP 403 on VPN
+/// exit IPs — either from its free-tier daily quota being shared across everyone
+/// using that same exit IP, or from it deliberately blocking known VPN/proxy IP
+/// ranges. MaxMind's GeoIP2 web service was tried before that, but it requires at
+/// least a MaxMind account plus a paid subscription to use as a hosted API.)
 struct IPLocationService: IPLocationFetching {
-    private let endpoint = URL(string: "https://ipapi.co/json/")!
+    private let endpoint = URL(string: "https://ipwho.is/")!
     private let session: URLSession
 
     init(session: URLSession = .shared) {
@@ -43,63 +45,64 @@ struct IPLocationService: IPLocationFetching {
         let decoder = JSONDecoder()
         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
 
-        // Check for ipapi.co's own error payload before the HTTP status code:
-        // rate-limit and quota errors can come back as a non-2xx status (e.g. 429)
-        // *with* a helpful reason in the body, and checking the status first would
-        // discard that reason in favor of a generic, undiagnosable message.
-        if let errorPayload = try? decoder.decode(IPAPIErrorPayload.self, from: data),
-           errorPayload.error == true {
-            throw IPLocationError.server(errorPayload.reason ?? "Unable to determine your location.")
-        }
-
-        // Neither a 2xx status nor ipapi.co's known error shape — surface the raw
-        // status and body (e.g. an HTML block page, or an unrecognized JSON error
-        // shape) instead of a generic, undiagnosable message.
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
-        }
-
         do {
-            let decoded = try decoder.decode(IPAPIResponse.self, from: data)
+            let decoded = try decoder.decode(IPWhoIsResponse.self, from: data)
+
+            // ipwho.is always answers with HTTP 200, even on failure — the real
+            // success/failure signal is the "success" field in the body, with the
+            // reason in "message".
+            guard decoded.success else {
+                throw IPLocationError.server(decoded.message ?? "Unable to determine your location.")
+            }
+
             return IPLocationInfo(
-                ip: decoded.ip,
+                ip: decoded.ip ?? "Unknown",
                 city: decoded.city,
                 region: decoded.region,
-                countryName: decoded.countryName,
+                countryName: decoded.country,
                 countryCode: decoded.countryCode,
-                org: decoded.org,
-                timezone: decoded.timezone
+                org: decoded.connection?.isp ?? decoded.connection?.org,
+                timezone: decoded.timezone?.id
             )
+        } catch let error as IPLocationError {
+            throw error
         } catch {
             throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
         }
     }
 }
 
-// MARK: - ipapi.co response shape
+// MARK: - ipwho.is response shape
 
-private struct IPAPIErrorPayload: Decodable {
-    let error: Bool?
-    let reason: String?
-}
-
-private struct IPAPIResponse: Decodable {
-    let ip: String
+private struct IPWhoIsResponse: Decodable {
+    let ip: String?
+    let success: Bool
+    let message: String?
     let city: String?
     let region: String?
-    let countryName: String?
+    let country: String?
     let countryCode: String?
-    let org: String?
-    let timezone: String?
+    let connection: Connection?
+    let timezone: Timezone?
 
     enum CodingKeys: String, CodingKey {
         case ip
+        case success
+        case message
         case city
         case region
-        case countryName = "country_name"
+        case country
         case countryCode = "country_code"
-        case org
+        case connection
         case timezone
+    }
+
+    struct Connection: Decodable {
+        let isp: String?
+        let org: String?
+    }
+
+    struct Timezone: Decodable {
+        let id: String?
     }
 }
