@@ -51,40 +51,20 @@ IPLocatorForTVOS/
 
 ## App icon
 
-`Assets.xcassets/App Icon & Top Shelf Image.brandassets` contains a custom icon: a
-translucent glass location pin built from true tangent-line pin geometry (the same
-construction real map-marker icons use, for correct, kink-free proportions). The head
-is shaded like a photographed glass sphere — Fresnel-bright rim, a tight specular
-hotspot plus a softer glow, an inner core shadow for roundness, and a blurred,
-inverted "crystal ball" glimpse of the scene behind it — sitting above a large
-glowing "landing" ellipse (roughly double the head's radius) that suggests a
-pinpointed location. The "IPLocator / FOR TVOS" wordmark sits beneath it in Outfit
-Bold, a freely-licensed stand-in for the system font (SF Pro) used by the in-app
-title, matched to its relative sizes/weight/letter-spacing, with a soft contact
-shadow so it sits in the same lit scene rather than looking pasted on. Background is
-the same navy-to-purple gradient as the in-app UI. A finishing pass adds a touch more
-contrast/saturation, a vignette that pulls focus back to the mark, fine film grain
-(so gradients read as material rather than flat digital banding), a whisper of
-chromatic aberration at the glass rim, and a light sharpen after the final resize.
+There is currently **no app icon wired up** (`ASSETCATALOG_COMPILER_APPICON_NAME` is
+unset) — the project builds and runs with Xcode's default placeholder icon.
 
-The icon uses tvOS's layered format (`App Icon.imagestack` with Front/Middle/Back
-layers, for the parallax effect on the home screen) plus a separate flat
-`App Icon - App Store.imagestack` for the large 1280×768 App Store size. The
-Front/Middle layers are transparent — the artwork is all on the Back layer — so the
-icon currently displays flat rather than with true parallax depth; ask if you'd
-like the design split across layers for a real depth effect.
-
-Note: real tvOS home-screen icons don't usually carry the app name baked in (the OS
-already labels icons on the home screen) — the wordmark is here because it was
-explicitly requested. Ask for an icon-only variant if you want one for store
-submission later. A Top Shelf Image (shown when the app is focused on the home
-screen) isn't included yet — say the word and I'll add one.
-
-For App Store submission, Apple additionally requires a **layered** icon (separate
-front/middle/back images for the parallax effect) and a **Top Shelf Image** — neither
-is included here since they need Xcode's icon composer / real design tooling. For
-development and TestFlight-style local testing, the flat icon above is picked up
-automatically (`ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon`).
+A custom icon was designed and rendered (a translucent glass location pin with
+photographed-glass-sphere shading, a glowing "landing" ellipse, and an "IPLocator /
+FOR TVOS" wordmark), but wiring it in as tvOS's layered icon format
+(`App Icon & Top Shelf Image.brandassets`, with Front/Middle/Back parallax layers and
+a separate App Store size) hit real validation errors in Xcode — Apple's exact schema
+for that format isn't practical to hand-write without Xcode itself available to
+verify it, so it was reverted to unblock building/running the app. The icon artwork
+itself is not lost; it just needs to be re-wired correctly, most reliably by letting
+Xcode generate the icon slots itself (**Assets.xcassets → right-click → New tvOS App
+Icon**) and dropping the rendered PNGs into the slots it creates, rather than
+hand-authoring the nested JSON again.
 
 ## Notes
 
