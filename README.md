@@ -60,9 +60,13 @@ glimpse of the scene behind it — sitting above a large glowing "landing" ellip
 (roughly double the head's radius) that suggests a pinpointed location. The
 "IPLocator / FOR TVOS" wordmark sits beneath it in Outfit Bold, a freely-licensed
 stand-in for the system font (SF Pro) used by the in-app title, matched to its
-relative sizes/weight/letter-spacing. Background is the same navy-to-purple gradient
-as the in-app UI. Provided as a flat (non-parallax) tvOS icon at the two required
-sizes (400×240 and 1280×768, @1x/@2x).
+relative sizes/weight/letter-spacing, with a soft contact shadow so it sits in the
+same lit scene rather than looking pasted on. Background is the same navy-to-purple
+gradient as the in-app UI. A finishing pass adds a touch more contrast/saturation, a
+vignette that pulls focus back to the mark, fine film grain (so gradients read as
+material rather than flat digital banding), a whisper of chromatic aberration at the
+glass rim, and a light sharpen after the final resize. Provided as a flat
+(non-parallax) tvOS icon at the two required sizes (400×240 and 1280×768, @1x/@2x).
 
 Note: real tvOS home-screen icons don't usually carry the app name baked in (the OS
 already labels icons on the home screen) — the wordmark is here because it was
