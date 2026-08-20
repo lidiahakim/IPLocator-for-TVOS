@@ -65,9 +65,11 @@ correctly in Xcode. Structure:
   across distinct layers for a real depth effect.
 - `Top Shelf Image` (1920×720) / `Top Shelf Image Wide` (2320×720) — the wide banner
   tvOS shows behind the app icon when it's focused/hovered on the home screen. Same
-  glass-pin-and-glow motif as the icon, without the wordmark (there's only 720px of
-  height to work with at 1x, and this space is meant as ambient background behind the
-  OS's own focus UI, not a second logo lockup).
+  glass-pin-and-glow motif, with the "IPLocator / FOR TVOS" wordmark set beside it
+  (vertically centered — there's only 720px of height at 1x, not enough for a
+  stacked layout like the icon uses), plus a small cluster of generic flag-on-a-pole
+  markers near the landing glow — uniform color, blank pennants, no stripes or
+  emblems, nodding at the app's per-country flags without depicting any specific one.
 
 This structure was derived directly from what Xcode's own "New tvOS App Icon"
 generator produced on the target machine (two earlier hand-authored attempts, closer
