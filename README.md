@@ -17,36 +17,37 @@ are required to run it.
 - On launch, fetches your public IP address and geolocation.
 - Displays the country flag (rendered from the ISO country code — no image assets
   needed), the "City, Region, Country" name, the IP address in a large monospaced
-  font, and timezone. (The network/ISP row only appears when the provider returns
-  one — DB-IP's free tier doesn't include it, so it won't show currently.)
+  font, timezone, and network/ISP name (when the provider returns one).
 - A focusable "Refresh" button (tvOS `.card` button style) re-queries on demand.
 - Handles loading and error states with a dedicated screen for each.
 
 ## About the data source
 
-`IPLocationService.swift` calls **[DB-IP's free API](https://db-ip.com/api/)**
-(`api.db-ip.com/v2/free/self`) — a keyless, HTTPS JSON API backed by DB-IP's own
-geolocation database. No account or API key needed (the literal path segment
-`free` stands in for one). It's rate-limited for evaluation-level use rather than
-built for high-volume traffic, but that fits an app that only looks itself up on
-demand. Its free tier doesn't include ISP/organization data, only city-level
-geolocation.
+`IPLocationService.swift` calls **[GeoJS](https://www.geojs.io)**
+(`get.geojs.io/v1/ip/geo.json`) — a free, keyless, HTTPS JSON API. No account or
+API key needed. GeoJS's own geolocation data is sourced from MaxMind's GeoLite2
+database, making it the closest free, accountless approximation of using MaxMind
+directly.
 
-(ipwho.is was tried before this. MaxMind's GeoIP2 web service was tried before
-that, since it's a well-known, accuracy-focused provider, but it requires at least
-a MaxMind account plus a paid subscription to use as a hosted API — there's no
-keyless or fully-free way to query it as a web service. ipapi.co was tried before
-that, but returns HTTP 403 on VPN exit IPs — either its free-tier daily quota being
-exhausted by everyone sharing that same exit IP, or it deliberately blocking known
-VPN/proxy IP ranges.
+(DB-IP's free API was tried before this, but flags frequent/VPN-like callers as
+abuse and pushes a paid plan. ipwho.is was tried before that. MaxMind's GeoIP2 web
+service was tried before that, since it's a well-known, accuracy-focused provider,
+but it requires at least a MaxMind account plus a paid subscription to use as a
+hosted API — there's no keyless or fully-free way to query it as a web service.
+ipapi.co was tried before that, but returns HTTP 403 on VPN exit IPs — either its
+free-tier daily quota being exhausted by everyone sharing that same exit IP, or it
+deliberately blocking known VPN/proxy IP ranges.
 
-DB-IP also publishes **DB-IP Lite** — an actual downloadable database file, like
-MaxMind's GeoLite2 but without needing an account — which would remove the network
-call entirely and can't be blocked on a VPN. That's a bigger change than swapping
-an API endpoint, though: it means bundling a large file in the app, adding a parser
-for it since there's no built-in Swift support, showing DB-IP's required
-attribution in the UI, and manually re-downloading it periodically since a bundled
-copy goes stale. Ask if you'd like to go that route instead.)
+None of these — MaxMind included — can be guaranteed correct for every VPN exit
+IP: geolocation databases are independently maintained per provider and can be
+stale or wrong for a specific IP block regardless of source. DB-IP and MaxMind
+both also publish an actual downloadable database file (DB-IP Lite / GeoLite2)
+rather than just a hosted API, which would remove the network call entirely and
+can't be blocked on a VPN — but that's a bigger change than swapping an endpoint:
+bundling a large file in the app, adding a parser since there's no built-in Swift
+support, showing the required attribution in the UI, and manually re-downloading
+it periodically since a bundled copy goes stale. Ask if you'd like to go that
+route instead.)
 
 The networking layer is isolated behind the `IPLocationFetching` protocol
 (`Services/IPLocationService.swift`), so switching providers later is a matter of
@@ -60,7 +61,7 @@ IPLocatorForTVOS/
   IPLocatorForTVOSApp.swift      App entry point
   ContentView.swift              Screen states + view model
   Models/IPLocationInfo.swift    Provider-agnostic location model
-  Services/IPLocationService.swift    Network call (DB-IP free API)
+  Services/IPLocationService.swift    Network call (GeoJS)
   Utilities/CountryFlag.swift    Country code -> flag emoji
   Views/BackgroundView.swift     Gradient background
   Views/LocationCardView.swift   Glass card showing flag/IP/location

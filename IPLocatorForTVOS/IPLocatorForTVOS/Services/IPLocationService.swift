@@ -22,20 +22,23 @@ protocol IPLocationFetching {
 
 /// Looks up the device's public IP address and geolocation.
 ///
-/// Uses DB-IP's free API — a keyless, HTTPS JSON API backed by DB-IP's own
-/// geolocation database — as the data source. No account or API key is
-/// required (the literal path segment "free" stands in for an API key). It's
-/// rate-limited for evaluation use rather than meant for high-volume traffic,
-/// but that fits an app that only looks itself up on demand.
+/// Uses GeoJS — a free, keyless, HTTPS JSON API — as the data source. No
+/// account or API key is required. GeoJS's own geolocation data is sourced
+/// from MaxMind's GeoLite2 database, which is the closest free, accountless
+/// approximation of using MaxMind directly.
 ///
-/// (ipwho.is was tried before this. MaxMind's GeoIP2 web service was tried
-/// before that, but it requires at least a MaxMind account plus a paid
-/// subscription to use as a hosted API. ipapi.co was tried before that, but
-/// returns HTTP 403 on VPN exit IPs — either its free-tier daily quota being
-/// exhausted by everyone sharing that same exit IP, or it deliberately
-/// blocking known VPN/proxy IP ranges.)
+/// (DB-IP's free API was tried before this, but flags frequent/VPN-like
+/// callers as abuse and pushes a paid plan. ipwho.is was tried before that.
+/// MaxMind's GeoIP2 web service was tried before that, but it requires at
+/// least a MaxMind account plus a paid subscription to use as a hosted API.
+/// ipapi.co was tried before that, but returns HTTP 403 on VPN exit IPs.
+///
+/// None of these -- MaxMind included -- can be guaranteed correct for every
+/// VPN exit IP: geolocation databases are independently maintained per
+/// provider and can be stale or wrong for a specific IP block regardless of
+/// source.)
 struct IPLocationService: IPLocationFetching {
-    private let endpoint = URL(string: "https://api.db-ip.com/v2/free/self")!
+    private let endpoint = URL(string: "https://get.geojs.io/v1/ip/geo.json")!
     private let session: URLSession
 
     init(session: URLSession = .shared) {
@@ -51,30 +54,21 @@ struct IPLocationService: IPLocationFetching {
         let decoder = JSONDecoder()
         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
 
-        // Check for DB-IP's own error payload before the HTTP status code:
-        // rate-limit responses can come back with a helpful reason in the
-        // body, and checking the status first would discard that reason in
-        // favor of a generic, undiagnosable message.
-        if let errorPayload = try? decoder.decode(DBIPErrorPayload.self, from: data),
-           let reason = errorPayload.error {
-            throw IPLocationError.server(reason)
-        }
-
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
             throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
         }
 
         do {
-            let decoded = try decoder.decode(DBIPResponse.self, from: data)
+            let decoded = try decoder.decode(GeoJSResponse.self, from: data)
             return IPLocationInfo(
-                ip: decoded.ipAddress,
+                ip: decoded.ip,
                 city: decoded.city,
-                region: decoded.stateProv,
-                countryName: decoded.countryName,
+                region: decoded.region,
+                countryName: decoded.country,
                 countryCode: decoded.countryCode,
-                org: nil,
-                timezone: decoded.timeZone
+                org: decoded.organizationName,
+                timezone: decoded.timezone
             )
         } catch {
             throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
@@ -82,17 +76,24 @@ struct IPLocationService: IPLocationFetching {
     }
 }
 
-// MARK: - DB-IP response shape
+// MARK: - GeoJS response shape
 
-private struct DBIPErrorPayload: Decodable {
-    let error: String?
-}
-
-private struct DBIPResponse: Decodable {
-    let ipAddress: String
+private struct GeoJSResponse: Decodable {
+    let ip: String
     let city: String?
-    let stateProv: String?
-    let countryName: String?
+    let region: String?
+    let country: String?
     let countryCode: String?
-    let timeZone: String?
+    let timezone: String?
+    let organizationName: String?
+
+    enum CodingKeys: String, CodingKey {
+        case ip
+        case city
+        case region
+        case country
+        case countryCode = "country_code"
+        case timezone
+        case organizationName = "organization_name"
+    }
 }
