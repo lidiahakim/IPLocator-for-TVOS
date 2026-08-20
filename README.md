@@ -53,25 +53,23 @@ IPLocatorForTVOS/
 
 `Assets.xcassets/Brand Assets.brandassets` contains a custom icon: a translucent
 glass location pin with photographed-glass-sphere shading, a glowing "landing"
-ellipse, sitting above a pinpointed location. Structure:
+ellipse, sitting above a pinpointed location. Confirmed building and showing up
+correctly in Xcode. Structure:
 
-- `App Icon.imagestack` (400×240, home screen) — the artwork is on the **Back**
-  layer; **Front** and **Middle** are present but empty, so it currently renders
-  flat rather than with true parallax depth.
-- `App Icon - App Store.imageset` (1280×768) — a plain flat image, no layering.
+- `App Icon.imagestack` (400×240, home screen) and `App Icon - App Store.imagestack`
+  (1280×768) — both layered image stacks (Front/Middle/Back, for the parallax effect
+  on the home screen). The artwork is duplicated onto the **Back** and **Middle**
+  layers (Xcode requires at least 2 of the 3 layers to have content); **Front** is
+  empty. Since Back and Middle are identical, it currently renders as a flat icon
+  rather than with true parallax depth — ask if you'd like the design actually split
+  across distinct layers for a real depth effect.
+- `Top Shelf Image` / `Top Shelf Image Wide` — present in the catalog but left empty
+  (no artwork at those sizes yet). Not required to build/run, only for App Store
+  submission — ask if you'd like these designed.
 
-An earlier attempt at this (naming the catalog `App Icon & Top Shelf Image` and
-wrapping the App Store icon in its own layered image-stack) failed Xcode's asset
-validation. This version corrects both: the catalog is named `Brand Assets` to match
-what Xcode's own icon generator actually names it, and the App Store icon is a plain
-image set rather than a layered stack. It has **not been confirmed working in a real
-Xcode build yet** — if you hit any asset-catalog errors, tell me the exact error text
-and I'll fix it, or fall back to letting Xcode generate the icon slots itself
-(**Assets.xcassets → right-click → New tvOS App Icon**) and dragging in the PNGs from
-the `IconSource/` folder at the repo root.
-
-A Top Shelf Image (shown when the app is focused on the home screen) isn't included
-yet — not required to build/run, only for App Store submission.
+This structure was derived directly from what Xcode's own "New tvOS App Icon"
+generator produced on the target machine (two earlier hand-authored attempts, closer
+guesses based on the asset catalog documentation, failed Xcode's validation).
 
 ## Notes
 
