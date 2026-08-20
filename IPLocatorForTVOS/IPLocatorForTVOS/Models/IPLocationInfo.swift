@@ -1,7 +1,8 @@
 import Foundation
 
-/// Decoded response from the IP geolocation service.
-struct IPLocationInfo: Decodable, Equatable {
+/// The device's public IP address and geolocation, mapped from whichever
+/// provider `IPLocationFetching` is backed by.
+struct IPLocationInfo: Equatable {
     let ip: String
     let city: String?
     let region: String?
@@ -10,16 +11,6 @@ struct IPLocationInfo: Decodable, Equatable {
     let org: String?
     let timezone: String?
 
-    enum CodingKeys: String, CodingKey {
-        case ip
-        case city
-        case region
-        case countryName = "country_name"
-        case countryCode = "country_code"
-        case org
-        case timezone
-    }
-
     /// A human-readable "City, Region, Country" label, skipping any missing parts.
     var locationName: String {
         [city, region, countryName]
@@ -27,10 +18,4 @@ struct IPLocationInfo: Decodable, Equatable {
             .filter { !$0.isEmpty }
             .joined(separator: ", ")
     }
-}
-
-/// Error payload the API returns instead of a location when it can't resolve the request.
-struct IPLocationErrorPayload: Decodable {
-    let error: Bool?
-    let reason: String?
 }

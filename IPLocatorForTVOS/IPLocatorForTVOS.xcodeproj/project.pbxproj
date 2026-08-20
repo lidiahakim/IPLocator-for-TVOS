@@ -11,6 +11,7 @@
 		784D636C4BE8369331E3DD63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B441ED04CA65DD311E759CD2 /* ContentView.swift */; };
 		69E7419EA3DEAAE34C3CCEED /* IPLocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3943B84FB50ADF82816E9ED5 /* IPLocationInfo.swift */; };
 		B66FB26B06E8F4A8D84A4622 /* IPLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9965A641C846E321FB115C /* IPLocationService.swift */; };
+		0B1518C4EC4517F10AFCC631 /* MaxMindCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CCD3E008EFD70263F58A99 /* MaxMindCredentials.swift */; };
 		2FA2C8395601678858FC7987 /* CountryFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40C9E87D94AEF2692BD37DD /* CountryFlag.swift */; };
 		BDE855E7BF3614F494C0FCD4 /* LocationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DFA7F670EF1C2C168E3ED /* LocationCardView.swift */; };
 		247978CFE057B6C050D0CC45 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE17544E098DF74B27B4287 /* BackgroundView.swift */; };
@@ -24,6 +25,7 @@
 		B441ED04CA65DD311E759CD2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3943B84FB50ADF82816E9ED5 /* IPLocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPLocationInfo.swift; sourceTree = "<group>"; };
 		AA9965A641C846E321FB115C /* IPLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPLocationService.swift; sourceTree = "<group>"; };
+		25CCD3E008EFD70263F58A99 /* MaxMindCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxMindCredentials.swift; sourceTree = "<group>"; };
 		A40C9E87D94AEF2692BD37DD /* CountryFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFlag.swift; sourceTree = "<group>"; };
 		550DFA7F670EF1C2C168E3ED /* LocationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardView.swift; sourceTree = "<group>"; };
 		4BE17544E098DF74B27B4287 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				AA9965A641C846E321FB115C /* IPLocationService.swift */,
+				25CCD3E008EFD70263F58A99 /* MaxMindCredentials.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				784D636C4BE8369331E3DD63 /* ContentView.swift in Sources */,
 				69E7419EA3DEAAE34C3CCEED /* IPLocationInfo.swift in Sources */,
 				B66FB26B06E8F4A8D84A4622 /* IPLocationService.swift in Sources */,
+				0B1518C4EC4517F10AFCC631 /* MaxMindCredentials.swift in Sources */,
 				2FA2C8395601678858FC7987 /* CountryFlag.swift in Sources */,
 				BDE855E7BF3614F494C0FCD4 /* LocationCardView.swift in Sources */,
 				247978CFE057B6C050D0CC45 /* BackgroundView.swift in Sources */,
