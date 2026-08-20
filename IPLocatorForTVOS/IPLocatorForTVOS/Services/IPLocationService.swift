@@ -1,13 +1,15 @@
 import Foundation
 
 enum IPLocationError: LocalizedError {
-    case invalidResponse
+    case invalidResponse(status: Int, body: String)
     case server(String)
 
     var errorDescription: String? {
         switch self {
-        case .invalidResponse:
-            return "The location service returned an unexpected response."
+        case .invalidResponse(let status, let body):
+            let trimmed = body.trimmingCharacters(in: .whitespacesAndNewlines)
+            let snippet = trimmed.isEmpty ? "empty body" : String(trimmed.prefix(300))
+            return "Unexpected response (HTTP \(status)): \(snippet)"
         case .server(let reason):
             return reason
         }
@@ -39,6 +41,7 @@ struct IPLocationService: IPLocationFetching {
 
         let (data, response) = try await session.data(for: request)
         let decoder = JSONDecoder()
+        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
 
         // Check for ipapi.co's own error payload before the HTTP status code:
         // rate-limit and quota errors can come back as a non-2xx status (e.g. 429)
@@ -49,9 +52,12 @@ struct IPLocationService: IPLocationFetching {
             throw IPLocationError.server(errorPayload.reason ?? "Unable to determine your location.")
         }
 
+        // Neither a 2xx status nor ipapi.co's known error shape — surface the raw
+        // status and body (e.g. an HTML block page, or an unrecognized JSON error
+        // shape) instead of a generic, undiagnosable message.
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
-            throw IPLocationError.invalidResponse
+            throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
         }
 
         do {
@@ -66,7 +72,7 @@ struct IPLocationService: IPLocationFetching {
                 timezone: decoded.timezone
             )
         } catch {
-            throw IPLocationError.invalidResponse
+            throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
         }
     }
 }
