@@ -63,9 +63,11 @@ correctly in Xcode. Structure:
   empty. Since Back and Middle are identical, it currently renders as a flat icon
   rather than with true parallax depth — ask if you'd like the design actually split
   across distinct layers for a real depth effect.
-- `Top Shelf Image` / `Top Shelf Image Wide` — present in the catalog but left empty
-  (no artwork at those sizes yet). Not required to build/run, only for App Store
-  submission — ask if you'd like these designed.
+- `Top Shelf Image` (1920×720) / `Top Shelf Image Wide` (2320×720) — the wide banner
+  tvOS shows behind the app icon when it's focused/hovered on the home screen. Same
+  glass-pin-and-glow motif as the icon, without the wordmark (there's only 720px of
+  height to work with at 1x, and this space is meant as ambient background behind the
+  OS's own focus UI, not a second logo lockup).
 
 This structure was derived directly from what Xcode's own "New tvOS App Icon"
 generator produced on the target machine (two earlier hand-authored attempts, closer
