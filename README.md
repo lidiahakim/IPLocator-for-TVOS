@@ -53,14 +53,21 @@ IPLocatorForTVOS/
 
 `Assets.xcassets/AppIcon.appiconset` contains a custom icon: a translucent glass
 location pin built from true tangent-line pin geometry (the same construction real
-map-marker icons use, for correct, kink-free proportions), lit with a radial "sphere"
-shading pass plus a soft bounce light for a rounded, 3D look, sitting above a large
-glowing "landing" ellipse (roughly double the pin head's radius) that suggests a
-pinpointed location. It's icon-only (no app name baked in) to match how real tvOS
-home-screen icons work — the OS renders the app's name as a separate label below the
-icon itself. Background is the same navy-to-purple gradient as the in-app UI.
-Provided as a flat (non-parallax) tvOS icon at the two required sizes (400×240 and
-1280×768, @1x/@2x).
+map-marker icons use, for correct, kink-free proportions). The head is shaded like a
+photographed glass sphere — Fresnel-bright rim, a tight specular hotspot plus a softer
+glow, an inner core shadow for roundness, and a blurred, inverted "crystal ball"
+glimpse of the scene behind it — sitting above a large glowing "landing" ellipse
+(roughly double the head's radius) that suggests a pinpointed location. The
+"IPLocator / FOR TVOS" wordmark sits beneath it in Outfit Bold, a freely-licensed
+stand-in for the system font (SF Pro) used by the in-app title, matched to its
+relative sizes/weight/letter-spacing. Background is the same navy-to-purple gradient
+as the in-app UI. Provided as a flat (non-parallax) tvOS icon at the two required
+sizes (400×240 and 1280×768, @1x/@2x).
+
+Note: real tvOS home-screen icons don't usually carry the app name baked in (the OS
+already labels icons on the home screen) — the wordmark is here because it was
+explicitly requested. Ask for an icon-only variant if you want one for store
+submission later.
 
 For App Store submission, Apple additionally requires a **layered** icon (separate
 front/middle/back images for the parallax effect) and a **Top Shelf Image** — neither
