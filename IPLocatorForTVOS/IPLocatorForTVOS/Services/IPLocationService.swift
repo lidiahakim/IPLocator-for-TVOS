@@ -38,17 +38,20 @@ struct IPLocationService: IPLocationFetching {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
         let (data, response) = try await session.data(for: request)
+        let decoder = JSONDecoder()
+
+        // Check for ipapi.co's own error payload before the HTTP status code:
+        // rate-limit and quota errors can come back as a non-2xx status (e.g. 429)
+        // *with* a helpful reason in the body, and checking the status first would
+        // discard that reason in favor of a generic, undiagnosable message.
+        if let errorPayload = try? decoder.decode(IPAPIErrorPayload.self, from: data),
+           errorPayload.error == true {
+            throw IPLocationError.server(errorPayload.reason ?? "Unable to determine your location.")
+        }
 
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
             throw IPLocationError.invalidResponse
-        }
-
-        let decoder = JSONDecoder()
-
-        if let errorPayload = try? decoder.decode(IPAPIErrorPayload.self, from: data),
-           errorPayload.error == true {
-            throw IPLocationError.server(errorPayload.reason ?? "Unable to determine your location.")
         }
 
         do {
