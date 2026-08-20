@@ -51,22 +51,16 @@ IPLocatorForTVOS/
 
 ## App icon
 
-`Assets.xcassets/AppIcon.appiconset` contains a custom icon: a frosted-glass location
-pin built from true tangent-line pin geometry (the same construction real map-marker
-icons use, for correct, kink-free proportions), lit with a radial "sphere" shading
-pass plus a soft bounce light for a rounded, 3D glass look, sitting above a large
+`Assets.xcassets/AppIcon.appiconset` contains a custom icon: a translucent glass
+location pin built from true tangent-line pin geometry (the same construction real
+map-marker icons use, for correct, kink-free proportions), lit with a radial "sphere"
+shading pass plus a soft bounce light for a rounded, 3D look, sitting above a large
 glowing "landing" ellipse (roughly double the pin head's radius) that suggests a
-pinpointed location. The "IPLocator / FOR TVOS" wordmark below it is set in Outfit
-Bold, chosen as a close, freely-licensed stand-in for the system font (SF Pro) used
-by the in-app title, at matching relative sizes/weights/letter-spacing. Background is
-the same navy-to-purple gradient as the in-app UI. Provided as a flat (non-parallax)
-tvOS icon at the two required sizes (400×240 and 1280×768, @1x/@2x).
-
-Note: Apple's Human Interface Guidelines generally recommend against putting the app
-name inside a tvOS icon (the OS already labels icons on the home screen below it) —
-it's included here because it was explicitly requested. It stays legible at both the
-small and large icon sizes; ask for an icon-only variant if you'd rather follow that
-guidance, e.g. for store submission.
+pinpointed location. It's icon-only (no app name baked in) to match how real tvOS
+home-screen icons work — the OS renders the app's name as a separate label below the
+icon itself. Background is the same navy-to-purple gradient as the in-app UI.
+Provided as a flat (non-parallax) tvOS icon at the two required sizes (400×240 and
+1280×768, @1x/@2x).
 
 For App Store submission, Apple additionally requires a **layered** icon (separate
 front/middle/back images for the parallax effect) and a **Top Shelf Image** — neither
