@@ -22,14 +22,20 @@ protocol IPLocationFetching {
 
 /// Looks up the device's public IP address and geolocation.
 ///
-/// Uses ipwho.is — a keyless, HTTPS JSON API — as the data source. No account or
-/// API key is required. (ipapi.co was tried first, but returns HTTP 403 on VPN
-/// exit IPs — either from its free-tier daily quota being shared across everyone
-/// using that same exit IP, or from it deliberately blocking known VPN/proxy IP
-/// ranges. MaxMind's GeoIP2 web service was tried before that, but it requires at
-/// least a MaxMind account plus a paid subscription to use as a hosted API.)
+/// Uses DB-IP's free API — a keyless, HTTPS JSON API backed by DB-IP's own
+/// geolocation database — as the data source. No account or API key is
+/// required (the literal path segment "free" stands in for an API key). It's
+/// rate-limited for evaluation use rather than meant for high-volume traffic,
+/// but that fits an app that only looks itself up on demand.
+///
+/// (ipwho.is was tried before this. MaxMind's GeoIP2 web service was tried
+/// before that, but it requires at least a MaxMind account plus a paid
+/// subscription to use as a hosted API. ipapi.co was tried before that, but
+/// returns HTTP 403 on VPN exit IPs — either its free-tier daily quota being
+/// exhausted by everyone sharing that same exit IP, or it deliberately
+/// blocking known VPN/proxy IP ranges.)
 struct IPLocationService: IPLocationFetching {
-    private let endpoint = URL(string: "https://ipwho.is/")!
+    private let endpoint = URL(string: "https://api.db-ip.com/v2/free/self")!
     private let session: URLSession
 
     init(session: URLSession = .shared) {
@@ -45,64 +51,48 @@ struct IPLocationService: IPLocationFetching {
         let decoder = JSONDecoder()
         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
 
+        // Check for DB-IP's own error payload before the HTTP status code:
+        // rate-limit responses can come back with a helpful reason in the
+        // body, and checking the status first would discard that reason in
+        // favor of a generic, undiagnosable message.
+        if let errorPayload = try? decoder.decode(DBIPErrorPayload.self, from: data),
+           let reason = errorPayload.error {
+            throw IPLocationError.server(reason)
+        }
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
+        }
+
         do {
-            let decoded = try decoder.decode(IPWhoIsResponse.self, from: data)
-
-            // ipwho.is always answers with HTTP 200, even on failure — the real
-            // success/failure signal is the "success" field in the body, with the
-            // reason in "message".
-            guard decoded.success else {
-                throw IPLocationError.server(decoded.message ?? "Unable to determine your location.")
-            }
-
+            let decoded = try decoder.decode(DBIPResponse.self, from: data)
             return IPLocationInfo(
-                ip: decoded.ip ?? "Unknown",
+                ip: decoded.ipAddress,
                 city: decoded.city,
-                region: decoded.region,
-                countryName: decoded.country,
+                region: decoded.stateProv,
+                countryName: decoded.countryName,
                 countryCode: decoded.countryCode,
-                org: decoded.connection?.isp ?? decoded.connection?.org,
-                timezone: decoded.timezone?.id
+                org: nil,
+                timezone: decoded.timeZone
             )
-        } catch let error as IPLocationError {
-            throw error
         } catch {
             throw IPLocationError.invalidResponse(status: statusCode, body: String(decoding: data, as: UTF8.self))
         }
     }
 }
 
-// MARK: - ipwho.is response shape
+// MARK: - DB-IP response shape
 
-private struct IPWhoIsResponse: Decodable {
-    let ip: String?
-    let success: Bool
-    let message: String?
+private struct DBIPErrorPayload: Decodable {
+    let error: String?
+}
+
+private struct DBIPResponse: Decodable {
+    let ipAddress: String
     let city: String?
-    let region: String?
-    let country: String?
+    let stateProv: String?
+    let countryName: String?
     let countryCode: String?
-    let connection: Connection?
-    let timezone: Timezone?
-
-    enum CodingKeys: String, CodingKey {
-        case ip
-        case success
-        case message
-        case city
-        case region
-        case country
-        case countryCode = "country_code"
-        case connection
-        case timezone
-    }
-
-    struct Connection: Decodable {
-        let isp: String?
-        let org: String?
-    }
-
-    struct Timezone: Decodable {
-        let id: String?
-    }
+    let timeZone: String?
 }
