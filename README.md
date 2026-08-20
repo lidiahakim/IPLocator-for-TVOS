@@ -23,29 +23,21 @@ are required to run it.
 
 ## About the data source
 
-`IPLocationService.swift` calls **[MaxMind's GeoIP2 web service](https://www.maxmind.com)**
-(the hosted, pay-per-query City API — not a local database file). It requests the
-special IP value `"me"`, which tells MaxMind to look up whatever address the
-request itself came from, so no separate "what's my IP" call is needed first.
+`IPLocationService.swift` calls **[ipapi.co](https://ipapi.co)** — a free, keyless,
+HTTPS JSON API. No account or API key needed.
 
-**Setup required:** this is an account-based API, not a keyless one.
-1. Sign up at maxmind.com and subscribe to a GeoIP2 Precision web service (City or
-   above — the free GeoLite2 databases are download-only and don't offer a hosted
-   web service).
-2. Generate a license key under your account's "Manage License Keys" page.
-3. Open `Services/MaxMindCredentials.swift` and fill in your account ID and license
-   key. Until you do, the app shows a clear "add your credentials" error instead of
-   crashing.
-
-These are secrets. If this repository is ever made public, replace them with
-placeholders and pass real values another way (an untracked config file,
-environment-specific build settings, a secrets manager) — don't leave a real
-license key in version control.
+(MaxMind's GeoIP2 web service was tried first, since it's a well-known,
+accuracy-focused provider, but it requires at least a MaxMind account plus a paid
+subscription to use as a hosted API — there's no keyless or fully-free way to query
+it as a web service. Their free GeoLite2 databases are download-only files, not
+something you can call over HTTP, and using one would mean bundling a large binary
+database in the app plus a third-party parser. ipapi.co avoids all of that.)
 
 The networking layer is isolated behind the `IPLocationFetching` protocol
-(`Services/IPLocationService.swift`), so swapping in a different provider later is
-a matter of adding a new type conforming to that protocol and passing it into
-`IPLocatorViewModel(service:)` in `ContentView.swift`, without touching any UI code.
+(`Services/IPLocationService.swift`), so switching providers later — MaxMind
+included, if you get an account — is a matter of adding a new type conforming to
+that protocol and passing it into `IPLocatorViewModel(service:)` in
+`ContentView.swift`, without touching any UI code.
 
 ## Project structure
 
@@ -54,8 +46,7 @@ IPLocatorForTVOS/
   IPLocatorForTVOSApp.swift      App entry point
   ContentView.swift              Screen states + view model
   Models/IPLocationInfo.swift    Provider-agnostic location model
-  Services/IPLocationService.swift    Network call (MaxMind GeoIP2 web service)
-  Services/MaxMindCredentials.swift   Your MaxMind account ID + license key
+  Services/IPLocationService.swift    Network call (ipapi.co)
   Utilities/CountryFlag.swift    Country code -> flag emoji
   Views/BackgroundView.swift     Gradient background
   Views/LocationCardView.swift   Glass card showing flag/IP/location
