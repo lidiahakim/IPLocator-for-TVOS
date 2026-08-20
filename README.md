@@ -67,9 +67,8 @@ correctly in Xcode. Structure:
   tvOS shows behind the app icon when it's focused/hovered on the home screen. Same
   glass-pin-and-glow motif, with the "IPLocator / FOR TVOS" wordmark set beside it
   (vertically centered — there's only 720px of height at 1x, not enough for a
-  stacked layout like the icon uses), plus a small cluster of generic flag-on-a-pole
-  markers near the landing glow — uniform color, blank pennants, no stripes or
-  emblems, nodding at the app's per-country flags without depicting any specific one.
+  stacked layout like the icon uses), sized and margined conservatively to stay
+  clear of TV overscan/safe-area cropping.
 
 This structure was derived directly from what Xcode's own "New tvOS App Icon"
 generator produced on the target machine (two earlier hand-authored attempts, closer
